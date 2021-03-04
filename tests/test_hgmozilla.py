@@ -4,8 +4,8 @@
 
 import unittest
 
-from libmozdata import hgmozilla
-from libmozdata.connection import Query
+from libtbdata import hgmozilla
+from libtbdata.connection import Query
 
 
 class RevisionTest(unittest.TestCase):
@@ -68,8 +68,8 @@ class RevisionTest(unittest.TestCase):
 
 class RawRevisionTest(unittest.TestCase):
     def test_revision(self):
-        rev = hgmozilla.RawRevision.get_revision("central", "1584ba8c1b86")
-        self.assertIn("# Node ID 1584ba8c1b86f9c4de5ccda5241cef36e80f042c", rev)
+        rev = hgmozilla.RawRevision.get_revision("central", "8be34b101c6c")
+        self.assertIn("# Node ID 8be34b101c6c13e178bf4c87462c0ef8f1bf27f6", rev)
 
     def test_revisions(self):
         data1 = {"first": None, "second": None}
@@ -139,7 +139,7 @@ class FileInfoTest(unittest.TestCase):
 
 class AnnotateTest(unittest.TestCase):
     def test_annotate(self):
-        path = "netwerk/protocol/http/nsHttpConnectionMgr.cpp"
+        path = "chat/protocols/matrix/matrix.jsm"
         info = hgmozilla.Annotate.get(path)
 
         self.assertIsNotNone(info)
@@ -152,8 +152,8 @@ class AnnotateTest(unittest.TestCase):
 
     def test_annotate_multiple_files(self):
         paths = [
-            "netwerk/protocol/http/nsHttpConnectionMgr.cpp",
-            "netwerk/protocol/http/nsHttpConnectionMgr.h",
+            "chat/protocols/matrix/matrix.jsm",
+            "chat/protocols/matrix/matrix-sdk.jsm",
         ]
         info = hgmozilla.Annotate.get(paths)
 
@@ -168,7 +168,7 @@ class AnnotateTest(unittest.TestCase):
             self.assertTrue("annotate" in annotations)
 
     def test_annotate_release_channel(self):
-        path = "netwerk/protocol/http/nsHttpConnectionMgr.cpp"
+        path = "chat/protocols/matrix/matrix.jsm"
         info = hgmozilla.Annotate.get(path, "release")
 
         self.assertIsNotNone(info)

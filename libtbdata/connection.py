@@ -53,7 +53,7 @@ class Connection(object):
     MAX_WORKERS = multiprocessing.cpu_count()
     CHUNK_SIZE = 32
     TOKEN = ""
-    USER_AGENT = config.get("User-Agent", "name", "libmozdata")
+    USER_AGENT = config.get("User-Agent", "name", "libtbdata (libmozdata fork)")
     X_FORWARDED_FOR = utils.get_x_fwed_for_str(
         config.get("X-Forwarded-For", "data", "")
     )

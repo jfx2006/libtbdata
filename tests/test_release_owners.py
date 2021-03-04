@@ -4,7 +4,7 @@
 
 import unittest
 
-from libmozdata import release_owners as ro
+from libtbdata import release_owners as ro
 
 
 class ReleaseOwnersTest(unittest.TestCase):

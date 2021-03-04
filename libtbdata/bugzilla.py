@@ -8,11 +8,19 @@ import re
 import requests
 import six
 
-import libmozdata.versions
+import libtbdata.versions
 
 from . import config, utils
 from .connection import Connection, Query
 from .handler import Handler
+
+# import logging
+# from http.client import HTTPConnection
+# HTTPConnection.debuglevel = 1
+# logging.getLogger().setLevel(logging.DEBUG)
+# requests_log = logging.getLogger("urllib3")
+# requests_log.setLevel(logging.DEBUG)
+# requests_log.propagate = True
 
 
 class Bugzilla(Connection):
@@ -235,7 +243,7 @@ class Bugzilla(Connection):
     def get_nightly_version():
         def handler(json, data):
             max_version = -1
-            pat = re.compile("cf_status_firefox([0-9]+)")
+            pat = re.compile("cf_status_thunderbird_([0-9]+)")
             for key in json.keys():
                 m = pat.match(key)
                 if m:
@@ -245,7 +253,7 @@ class Bugzilla(Connection):
             data[0] = max_version
 
         nightly_version = [-1]
-        Bugzilla(bugids=["1234567"], bughandler=handler, bugdata=nightly_version).wait()
+        Bugzilla(bugids=["679218"], bughandler=handler, bugdata=nightly_version).wait()
 
         return nightly_version[0]
 
@@ -339,7 +347,7 @@ class Bugzilla(Connection):
         return history_entries
 
     @staticmethod
-    def get_landing_patterns(channels=["release", "beta", "aurora", "nightly"]):
+    def get_landing_patterns(channels=["release", "beta", "nightly"]):
         if not isinstance(channels, list):
             channels = [channels]
 
@@ -349,53 +357,33 @@ class Bugzilla(Connection):
                 landing_patterns += [
                     (
                         re.compile(
-                            r"://hg.mozilla.org/mozilla-central/rev/([0-9a-f]+)"
+                            r"://hg.mozilla.org/comm-central/rev/([0-9a-f]+)"
                         ),
                         channel,
                     ),
                     (
                         re.compile(
-                            r"://hg.mozilla.org/mozilla-central/pushloghtml\?changeset=([0-9a-f]+)"
+                            r"://hg.mozilla.org/comm-central/pushloghtml\?changeset=([0-9a-f]+)"
                         ),
                         channel,
                     ),
                 ]
-            elif channel == "inbound":
+            elif channel == "beta":
                 landing_patterns += [
                     (
                         re.compile(
-                            r"://hg.mozilla.org/integration/mozilla-inbound/rev/([0-9a-f]+)"
-                        ),
-                        "inbound",
-                    )
-                ]
-            elif channel in ["release", "beta", "aurora"]:
-                landing_patterns += [
-                    (
-                        re.compile(
-                            r"://hg.mozilla.org/releases/mozilla-"
-                            + channel
-                            + "/rev/([0-9a-f]+)"
+                            r"://hg.mozilla.org/releases/comm-beta/rev/([0-9a-f]+)"
                         ),
                         channel,
                     )
                 ]
-            elif channel == "esr":
+            elif channel == "release":
                 landing_patterns += [
                     (
                         re.compile(
-                            r"://hg.mozilla.org/releases/mozilla-esr(?:[0-9]+)/rev/([0-9a-f]+)"
+                            r"://hg.mozilla.org/releases/comm-esr(?:[0-9]+)/rev/([0-9a-f]+)"
                         ),
                         channel,
-                    )
-                ]
-            elif channel == "fx-team":
-                landing_patterns += [
-                    (
-                        re.compile(
-                            r"://hg.mozilla.org/integration/fx-team/rev/([0-9a-f]+)"
-                        ),
-                        "inbound",
                     )
                 ]
             else:
@@ -411,6 +399,9 @@ class Bugzilla(Connection):
         results = []
 
         for comment in comments:
+            if "[Approval Request Comment]" in comment["text"]:
+                # This is not a landing, its an approval request with a commit URL
+                continue
             for landing_pattern in landing_patterns:
                 for match in landing_pattern[0].finditer(comment["text"]):
                     results.append(
@@ -426,15 +417,15 @@ class Bugzilla(Connection):
     @staticmethod
     def get_status_flags(base_versions=None):
         if not base_versions:
-            base_versions = libmozdata.versions.get(base=True)
+            base_versions = libtbdata.versions.get(base=True)
 
         status_flags = {}
         for c, v in base_versions.items():
             v = str(v)
-            if c == "esr":
-                f = "cf_status_firefox_esr" + v
+            if c == "release":
+                f = "cf_status_thunderbird_esr" + v
             else:
-                f = "cf_status_firefox" + v
+                f = "cf_status_thunderbird_" + v
             status_flags[c] = f
 
         return status_flags

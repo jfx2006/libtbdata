@@ -12,10 +12,10 @@ from datetime import datetime, timedelta
 import pytz
 import responses
 
-from libmozdata import patchanalysis, utils, versions
-from libmozdata.bugzilla import Bugzilla
-from libmozdata.hgmozilla import Mercurial
-from libmozdata.socorro import Socorro
+from libtbdata import patchanalysis, utils, versions
+from libtbdata.bugzilla import Bugzilla
+from libtbdata.hgmozilla import Mercurial
+from libtbdata.socorro import Socorro
 from tests.auto_mock import MockTestCase
 
 

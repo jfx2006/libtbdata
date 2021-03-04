@@ -2,7 +2,7 @@ import unittest
 
 import responses
 
-from libmozdata import buildhub
+from libtbdata import buildhub
 
 
 class BuidlhubTest(unittest.TestCase):

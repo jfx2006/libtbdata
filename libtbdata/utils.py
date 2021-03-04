@@ -302,7 +302,7 @@ def mean_stddev(x):
 
 
 def get_channels():
-    return ["nightly", "aurora", "beta", "release", "esr"]
+    return ["nightly", "beta", "release",]
 
 
 def get_str_list(x):

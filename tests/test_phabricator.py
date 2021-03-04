@@ -1,7 +1,7 @@
 import pickle
 import unittest
 
-from libmozdata.phabricator import PhabricatorPatch
+from libtbdata.phabricator import PhabricatorPatch
 
 
 class PhabricatorTest(unittest.TestCase):
@@ -9,7 +9,7 @@ class PhabricatorTest(unittest.TestCase):
         """
         Simply import the library to check that all requirements are available
         """
-        from libmozdata.phabricator import PhabricatorAPI  # noqa
+        from libtbdata.phabricator import PhabricatorAPI  # noqa
 
         assert True
 

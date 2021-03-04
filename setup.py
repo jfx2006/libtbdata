@@ -20,12 +20,12 @@ with open(os.path.join(here, "VERSION")) as f:
     version = f.read().strip()
 
 setup(
-    name="libmozdata",
+    name="libtbdata",
     version=version,
-    description="Library to access and aggregate several Mozilla data sources.",
-    author="Mozilla Release Management",
-    author_email="release-mgmt@mozilla.com",
-    url="https://github.com/mozilla/libmozdata",
+    description="Library to access and aggregate several Mozilla data sources. This is the Thunderbird fork.",
+    author="Thunderbird Engineers and Mozilla Release Management",
+    author_email="tb-builds@thunderbird.net",
+    url="https://github.com/jfx2006/libtbdata",
     install_requires=load_requirements("requirements.txt"),
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     include_package_data=True,

@@ -4,7 +4,7 @@
 
 import unittest
 
-from libmozdata.wiki_parser import WikiParser
+from libtbdata.wiki_parser import WikiParser
 
 TABLE_1 = [
     [

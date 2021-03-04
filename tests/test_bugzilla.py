@@ -7,8 +7,8 @@ import unittest
 
 import responses
 
-from libmozdata import bugzilla, handler
-from libmozdata.connection import Query
+from libtbdata import bugzilla, handler
+from libtbdata.connection import Query
 from tests.auto_mock import MockTestCase
 
 
@@ -440,128 +440,105 @@ class BugCommentHistoryTest(MockTestCase):
 
         data = {}
         bugzilla.Bugzilla(
-            538189, commenthandler=commenthandler, commentdata=data
+            656113, commenthandler=commenthandler, commentdata=data
         ).get_data().wait()
 
-        inbound = bugzilla.Bugzilla.get_landing_comments(data["comments"], "inbound")
-        self.assertEqual(len(inbound), 1)
-        self.assertEqual(inbound[0]["revision"], "42c54c7cb4a3")
-        self.assertEqual(
-            inbound[0]["comment"],
-            {
-                "count": 39,
-                "attachment_id": None,
-                "raw_text": "http://hg.mozilla.org/integration/mozilla-inbound/rev/42c54c7cb4a3",
-                "tags": [],
-                "is_private": False,
-                "creator": "cam@mcc.id.au",
-                "bug_id": 538189,
-                "author": "cam@mcc.id.au",
-                "text": "http://hg.mozilla.org/integration/mozilla-inbound/rev/42c54c7cb4a3",
-                "id": 5655196,
-                "creation_time": "2011-08-15T21:21:13Z",
-                "time": "2011-08-15T21:21:13Z",
-            },
-        )
         central = bugzilla.Bugzilla.get_landing_comments(data["comments"], "central")
         self.assertEqual(len(central), 1)
-        self.assertEqual(central[0]["revision"], "42c54c7cb4a3")
+        self.assertEqual(central[0]["revision"], "658a49b14bd6")
         self.assertEqual(
             central[0]["comment"],
             {
-                "count": 43,
-                "attachment_id": None,
-                "raw_text": "http://hg.mozilla.org/mozilla-central/rev/42c54c7cb4a3\n\nAsa, did you mean to set approval-beta+ instead of approval-beta?",
-                "tags": [],
-                "is_private": False,
-                "creator": "khuey@kylehuey.com",
-                "bug_id": 538189,
-                "author": "khuey@kylehuey.com",
-                "text": "http://hg.mozilla.org/mozilla-central/rev/42c54c7cb4a3\n\nAsa, did you mean to set approval-beta+ instead of approval-beta?",
-                "id": 5656549,
-                "creation_time": "2011-08-16T11:02:36Z",
-                "time": "2011-08-16T11:02:36Z",
+                    'text': 'Pushed by '
+                            'geoff@darktrojan.net:\nhttps://hg.mozilla.org/comm-central/rev'
+                            '/658a49b14bd6\nUse a grid in the editContactPanel. r=mkmelin',
+                    'count': 7,
+                    'id': 14974844,
+                    'time': '2020-08-06T04:18:30Z',
+                    'tags': [],
+                    'bug_id': 656113,
+                    'attachment_id': None,
+                    'creation_time':
+                        '2020-08-06T04:18:30Z',
+                    'author': 'pulsebot@bots.tld',
+                    'raw_text': 'Pushed by '
+                                'geoff@darktrojan.net:\nhttps://hg.mozilla.org/comm-central/rev'
+                                '/658a49b14bd6\nUse a grid in the editContactPanel. r=mkmelin',
+                    'creator': 'pulsebot@bots.tld',
+                    'is_private': False
             },
         )
         beta = bugzilla.Bugzilla.get_landing_comments(data["comments"], "beta")
         self.assertEqual(len(beta), 1)
-        self.assertEqual(beta[0]["revision"], "1d02edaa92bc")
+        self.assertEqual(beta[0]["revision"], "7acaed666b89")
         self.assertEqual(
             beta[0]["comment"],
             {
-                "count": 51,
-                "attachment_id": None,
-                "raw_text": "http://hg.mozilla.org/releases/mozilla-beta/rev/1d02edaa92bc",
-                "tags": [],
-                "is_private": False,
-                "creator": "cam@mcc.id.au",
-                "bug_id": 538189,
-                "author": "cam@mcc.id.au",
-                "text": "http://hg.mozilla.org/releases/mozilla-beta/rev/1d02edaa92bc",
-                "id": 5686198,
-                "creation_time": "2011-08-29T21:55:57Z",
-                "time": "2011-08-29T21:55:57Z",
+                 'count': 11,
+                 'text': 'Thunderbird '
+                         '80.0b2:\nhttps://hg.mozilla.org/releases/comm-beta/rev/7acaed666b89',
+                 'time': '2020-08-07T23:41:13Z',
+                 'id': 14979145,
+                 'tags': ['bugherder', 'uplift'],
+                 'bug_id': 656113,
+                 'creation_time': '2020-08-07T23:41:13Z',
+                 'attachment_id': None,
+                 'creator': 'rob@thunderbird.net',
+                 'raw_text': 'Thunderbird 80.0b2:\nhttps://hg.mozilla.org/releases/comm-beta/rev/7acaed666b89',
+                 'author': 'rob@thunderbird.net',
+                 'is_private': False
             },
         )
 
         multiple = bugzilla.Bugzilla.get_landing_comments(
-            data["comments"], ["beta", "inbound", "central"]
+            data["comments"], ["beta", "central"]
         )
         self.assertEqual(
             multiple,
             [
                 {
-                    "revision": "42c54c7cb4a3",
-                    "channel": "inbound",
-                    "comment": {
-                        "count": 39,
-                        "creation_time": "2011-08-15T21:21:13Z",
-                        "is_private": False,
-                        "attachment_id": None,
-                        "text": "http://hg.mozilla.org/integration/mozilla-inbound/rev/42c54c7cb4a3",
-                        "creator": "cam@mcc.id.au",
-                        "tags": [],
-                        "bug_id": 538189,
-                        "author": "cam@mcc.id.au",
-                        "time": "2011-08-15T21:21:13Z",
-                        "id": 5655196,
-                        "raw_text": "http://hg.mozilla.org/integration/mozilla-inbound/rev/42c54c7cb4a3",
-                    },
-                },
-                {
-                    "revision": "42c54c7cb4a3",
+                    "revision": "658a49b14bd6",
                     "channel": "central",
                     "comment": {
-                        "count": 43,
-                        "creation_time": "2011-08-16T11:02:36Z",
-                        "is_private": False,
-                        "attachment_id": None,
-                        "text": "http://hg.mozilla.org/mozilla-central/rev/42c54c7cb4a3\n\nAsa, did you mean to set approval-beta+ instead of approval-beta?",
-                        "creator": "khuey@kylehuey.com",
-                        "tags": [],
-                        "bug_id": 538189,
-                        "author": "khuey@kylehuey.com",
-                        "time": "2011-08-16T11:02:36Z",
-                        "id": 5656549,
-                        "raw_text": "http://hg.mozilla.org/mozilla-central/rev/42c54c7cb4a3\n\nAsa, did you mean to set approval-beta+ instead of approval-beta?",
+                        'text': 'Pushed by '
+                                'geoff@darktrojan.net:\nhttps://hg.mozilla.org/comm-central/rev'
+                                '/658a49b14bd6\nUse a grid in the editContactPanel. r=mkmelin',
+                        'count': 7,
+                        'id': 14974844,
+                        'time': '2020-08-06T04:18:30Z',
+                        'tags': [],
+                        'bug_id': 656113,
+                        'attachment_id': None,
+                        'creation_time':
+                            '2020-08-06T04:18:30Z',
+                        'author': 'pulsebot@bots.tld',
+                        'raw_text': 'Pushed by '
+                                    'geoff@darktrojan.net:\nhttps://hg.mozilla.org/comm-central/rev'
+                                    '/658a49b14bd6\nUse a grid in the editContactPanel. r=mkmelin',
+                        'creator': 'pulsebot@bots.tld',
+                        'is_private': False
                     },
                 },
                 {
-                    "revision": "1d02edaa92bc",
+                    "revision": "7acaed666b89",
                     "channel": "beta",
                     "comment": {
-                        "count": 51,
-                        "creation_time": "2011-08-29T21:55:57Z",
-                        "is_private": False,
-                        "attachment_id": None,
-                        "text": "http://hg.mozilla.org/releases/mozilla-beta/rev/1d02edaa92bc",
-                        "creator": "cam@mcc.id.au",
-                        "tags": [],
-                        "bug_id": 538189,
-                        "author": "cam@mcc.id.au",
-                        "time": "2011-08-29T21:55:57Z",
-                        "id": 5686198,
-                        "raw_text": "http://hg.mozilla.org/releases/mozilla-beta/rev/1d02edaa92bc",
+                        'count': 11,
+                        'text': 'Thunderbird '
+                                '80.0b2:\nhttps://hg.mozilla.org/releases/comm-beta/rev'
+                                '/7acaed666b89',
+                        'time': '2020-08-07T23:41:13Z',
+                        'id': 14979145,
+                        'tags': ['bugherder', 'uplift'],
+                        'bug_id': 656113,
+                        'creation_time': '2020-08-07T23:41:13Z',
+                        'attachment_id': None,
+                        'creator': 'rob@thunderbird.net',
+                        'raw_text': 'Thunderbird '
+                                    '80.0b2:\nhttps://hg.mozilla.org/releases/comm-beta/rev'
+                                    '/7acaed666b89',
+                        'author': 'rob@thunderbird.net',
+                        'is_private': False
                     },
                 },
             ],
@@ -569,11 +546,11 @@ class BugCommentHistoryTest(MockTestCase):
 
         data = {}
         bugzilla.Bugzilla(
-            679352, commenthandler=commenthandler, commentdata=data
+            1634963, commenthandler=commenthandler, commentdata=data
         ).get_data().wait()
 
         central = bugzilla.Bugzilla.get_landing_comments(data["comments"], "central")
-        self.assertEqual(len(central), 8)
+        self.assertEqual(len(central), 6)
 
 
 class BugAttachmentTest(MockTestCase):
@@ -991,7 +968,7 @@ class User(MockTestCase):
     @responses.activate
     def test_get_nightly_version(self):
         nv = bugzilla.Bugzilla.get_nightly_version()
-        self.assertEqual(nv, 52)
+        self.assertEqual(nv, 81)
 
 
 class BugLinksTest(unittest.TestCase):

@@ -4,7 +4,7 @@
 
 import unittest
 
-from libmozdata import modules
+from libtbdata import modules
 
 
 class ModulesTest(unittest.TestCase):

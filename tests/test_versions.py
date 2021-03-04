@@ -9,8 +9,8 @@ from contextlib import contextmanager
 import responses
 from dateutil.tz import tzutc
 
-import libmozdata.utils as utils
-import libmozdata.versions as versions
+import libtbdata.utils as utils
+import libtbdata.versions as versions
 
 
 class VersionsTest(unittest.TestCase):

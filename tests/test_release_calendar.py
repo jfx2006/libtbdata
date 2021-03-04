@@ -4,7 +4,7 @@
 
 import unittest
 
-from libmozdata import release_calendar as rc
+from libtbdata import release_calendar as rc
 
 
 class ReleaseCalendarTest(unittest.TestCase):

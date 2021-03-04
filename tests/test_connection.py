@@ -4,7 +4,7 @@
 
 import unittest
 
-from libmozdata.connection import Query
+from libtbdata.connection import Query
 
 
 class QueryTest(unittest.TestCase):

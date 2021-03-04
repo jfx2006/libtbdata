@@ -4,7 +4,7 @@
 
 import unittest
 
-from libmozdata import socorro
+from libtbdata import socorro
 
 
 class SuperSearchTest(unittest.TestCase):

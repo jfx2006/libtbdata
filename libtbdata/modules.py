@@ -41,25 +41,8 @@ def module_from_path(path):
 
     # If we couldn't pinpoint the module, use some heuristics.
     if maxCommon["module"] is None:
-        if (
-            path.endswith("configure.in")
-            or path.endswith("moz.build")
-            or path.endswith("client.mk")
-            or path.endswith("moz.configure")
-            or path.endswith("aclocal.m4")
-            or path.endswith("Makefile.in")
-            or path.startswith("python/mach")
-        ):
+        if path.endswith("moz.build"):
             return module_info("Build Config")
-
-        if path.startswith("js/"):
-            return module_info("JavaScript")
-
-        if path.startswith("security/"):
-            return module_info("security")
-
-        if path.startswith("tools/profiler/"):
-            return module_info("Code Analysis and Debugging Tools")
 
     return maxCommon["module"]
 

@@ -1,0 +1,456 @@
+[
+  {
+    "name": "Thunderbird",
+    "description": "Standalone Mail Application",
+    "owners": [
+      {
+        "name": "Magnus Melin",
+        "email": "mkmelin+mozilla@iki.fi"
+      }
+    ],
+    "ownersEmeritus": [
+      {
+        "name": "Mark Banner"
+      },
+      {
+        "name": "David Bienvenu"
+      },
+      {
+        "name": "Scott MacGregor"
+      }
+    ],
+    "peers": [
+      {
+        "name": "Geoff Lankow",
+        "email": "geoff@darktrojan.net"
+      },
+      {
+        "name": "Aceman",
+        "email": "acelists@atlas.sk"
+      },
+      {
+        "name": "Jörg Knobloch",
+        "email": "mozilla@jorgk.com"
+      },
+      {
+        "name": "Richard Marti",
+        "email": "richard.marti@gmail.com"
+      }
+    ],
+    "sourceDirs": [
+      "mail/",
+      "mail/themes/",
+      "other-licenses/branding/thunderbird/"
+    ],
+    "urls": [
+      {
+        "url": "https: //developer.thunderbird.net/"
+      }
+    ],
+    "bugzillaComponents": [
+      "Thunderbird"
+    ]
+  },
+  {
+    "name": "Build Config",
+    "description": "Build Automation",
+    "owners": [
+      {
+        "name": "Rob Lemley",
+        "email": "rob@thunderbird.net"
+      }
+    ],
+    "sourceDirs": [
+      "build/",
+      "mail/config/",
+      "mozharness/builds/",
+      "mozharness/releases/",
+      "mozharness/repackage/",
+      "mozharness/single_locale/",
+      "other-licenses/",
+      "python/",
+      "taskcluster/",
+      "third_party/"
+    ],
+    "peers": [
+      {
+        "name": "Philipp Kewisch",
+        "email": "mozilla@kewis.ch"
+      }
+    ],
+    "bugzillaComponents": "Thunderbird:: Build Config"
+  },
+  {
+    "name": "Add-on Support",
+    "description": "APIs to enable extensions, as well as their installation",
+    "owners": [
+      {
+        "name": "Geoff Lankow",
+        "email": "geoff@darktrojan.net"
+      }
+    ],
+    "peers": [
+      {
+        "name": "Philipp Kewisch",
+        "email": "mozilla@kewis.ch"
+      }
+    ],
+    "sourceDirs": [
+      "mail/components/extensions/"
+    ],
+    "bugzillaComponents": [
+      "Thunderbird:: Add-Ons Extensions API",
+      "Thunderbird:: Add-Ons General"
+    ]
+  },
+  {
+    "name": "Instant Messaging",
+    "description": "The chat and instant messaging component of Thunderbird",
+    "owners": [
+      {
+        "name": "Florian Quèze",
+        "email": "florian@mozilla.com"
+      }
+    ],
+    "peers": [
+      {
+        "namd": "Patrick Cloke",
+        "email": "clokep@gmail.com"
+      }
+    ],
+    "bugzillaComponents": [
+      "Thunderbird:: Instant Messaging"
+    ],
+    "sourceDirs": [
+      "mail/components/im/",
+      "chat/"
+    ]
+  },
+  {
+    "name": "Theme",
+    "description": "",
+    "owners": [
+      {
+        "name": "Richard Marti",
+        "email": "richard.marti@gmail.com"
+      }
+    ],
+    "bugzillaComponents": [
+      "Thunderbird:: Theme"
+    ],
+    "sourceDirs": [
+      "mail/themes/"
+    ]
+  },
+  {
+    "name": "Message Security",
+    "description": "OpenPGP and S/MIME message security",
+    "owners": [
+      {
+        "name": "Kai Engert",
+        "email": "kaie@thunderbird.net"
+      }
+    ],
+    "peers": [
+      {
+        "name": "Patrick Brunschwig",
+        "email": "patrick@enigmail.net"
+      },
+      {
+        "name": "Magnus Melin",
+        "email": "mkmelin+mozilla@iki.fi"
+      }
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Security: OpenPGP"
+    ],
+    "sourceDirs": [
+      "mail/extensions/openpgp",
+      "mail/extensions/smime"
+    ]
+  },
+  {
+    "name": "Calendar",
+    "description": "Calendaring components, including the Lightning extension for Thunderbird",
+    "owners": {
+      "name": "Philipp Kewisch",
+      "email": "mozilla@kewis.ch"
+    },
+    "peers": [
+      {
+        "name": "Geoff Lankow",
+        "email": "geoff@darktrojan.net"
+      },
+      {
+        "emails": "paul@thunderbird.net",
+        "name": "Paul Morris"
+      }
+    ],
+    "sourceDirs": [
+      "calendar/"
+    ],
+    "urls": [
+      {
+        "url": "https://developer.mozilla.org/en/Calendar"
+      }
+    ],
+    "bugzillaComponents": [
+      "Calendar"
+    ]
+  },
+  {
+    "name": "GloDa",
+    "description": "Global message database",
+    "owners": [],
+    "peers": [
+      {
+        "name": "Jonathan Protzenko",
+        "email": "jonathan.protzenko@gmail.com",
+        "annotation": ":protz"
+      }
+    ],
+    "ownersEmeritus": [],
+    "peersEmeritus": [],
+    "sourceDirs": [
+      "mailnews/db/gloda"
+    ],
+    "bugzillaComponents": [],
+    "urls": []
+  },
+  {
+    "name": "S/MIME",
+    "description": "S/MIME backend",
+    "owners": [
+      {
+        "name": "Kai Engert",
+        "email": "kaie@thunderbird.net"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/extensions/smime"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core::Security: S/MIME"
+    ]
+  },
+  {
+    "name": "Localization",
+    "description": "",
+    "peers": [
+      {
+        "name": "Philipp Kewisch",
+        "email": "mozilla@kewis.ch"
+      }
+    ],
+    "sourceDirs": [
+      "mail/locales/"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Localization"
+    ]
+  },
+  {
+    "name": "Import",
+    "description": "",
+    "owner": [
+      {
+        "name": "Jörg Knobloch",
+        "email": "mozilla@jorgk.com"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/import"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Import"
+    ]
+  },
+  {
+    "name": "Unit Testing Infrastructure",
+    "description": "",
+    "owner": [
+      {
+        "name": "Geoff Lankow",
+        "email": "geoff@darktrojan.net"
+      }
+    ],
+    "peers": [
+      {
+        "name": "Magnus Melin",
+        "email": "mkmelin+mozilla@iki.fi"
+      },
+      {
+        "name": "Joshua Cranmer",
+        "email": "Pidgeot18@gmail.com"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/test",
+      "mailnews/base/test",
+      "tools/"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Testing Infrastructure"
+    ]
+  },
+  {
+    "name": "News",
+    "description": "",
+    "owner": [
+      {
+        "name": "Joshua Cranmer",
+        "email": "Pidgeot18@gmail.com"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/news"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Networking: NNTP"
+    ]
+  },
+  {
+    "name": "MIME Parser",
+    "description": "RFC822 MIME Parser",
+    "peers": [
+      {
+        "name": "Joshua Cranmer",
+        "email": "Pidgeot18@gmail.com"
+      },
+      {
+        "name": "Jörg Knobloch",
+        "email": "mozilla@jorgk.com"
+      },
+      {
+        "name": "Magnus Melin",
+        "email": "mkmelin+mozilla@iki.fi"
+      },
+      {
+        "name": "Jim Porter",
+        "email": "squibblyflabbetydoo@gmail.com"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/mime"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: MIME",
+      "MailNews Core:: Attachments"
+    ]
+  },
+  {
+    "name": "Addressbook",
+    "description": "",
+    "owners": [
+      {
+        "name": "Geoff Lankow",
+        "email": "geoff@darktrojan.net"
+      }
+    ],
+    "peers": [
+      {
+        "name": "Aceman",
+        "email": "acelists@atlas.sk"
+      },
+      {
+        "name": "Magnus Melin",
+        "email": "mkmelin+mozilla@iki.fi"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/addressbook"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Address Book"
+    ]
+  },
+  {
+    "name": "Feeds",
+    "description": "",
+    "peers": [
+      {
+        "name": "Magnus Melin",
+        "email": "mkmelin+mozilla@iki.fi"
+      },
+      {
+        "name": "",
+        "email": "alta88@gmail.com"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/extensions/newsblog"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Feed Reader"
+    ]
+  },
+  {
+    "name": "IMAP handling code",
+    "description": "",
+    "owner": [
+      {
+        "name": "Gene Smith",
+        "email": "gds@chartertn.net"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/imap"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Networking: IMAP"
+    ]
+  },
+  {
+    "name": "LDAP XPCOM SDK",
+    "description": "",
+    "owner": [
+      {
+        "name": "Ben Campbell",
+        "email": "benc@thunderbird.net"
+      }
+    ],
+    "sourceDirs": [
+      "ldap/"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: LDAP Integration"
+    ]
+  },
+  {
+    "name": "Message Database",
+    "description": "MSF files",
+    "peers": [
+      {
+        "name": "Aceman",
+        "email": "acelists@atlas.sk"
+      },
+      {
+        "name": "Joshua Cranmer",
+        "email": "Pidgeot18@gmail.com"
+      }
+    ],
+    "sourceDirs": [
+      "mailnews/db"
+    ],
+    "bugzillaComponents": [
+      "MailNews Core:: Database"
+    ]
+  },
+  {
+    "name": "Seamonkey",
+    "description": "",
+    "owners": [
+      {
+        "name": "Seamonkey Devs"
+      }
+    ],
+    "peers": [
+    ],
+    "sourceDirs": [
+      "suite/"
+    ],
+    "bugzillaComponents": [
+      "Seamonkey"
+    ]
+  }
+]

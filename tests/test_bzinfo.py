@@ -4,7 +4,7 @@
 
 import unittest
 
-from libmozdata.BZInfo import BZInfo
+from libtbdata.BZInfo import BZInfo
 
 
 class BZInfoTest(unittest.TestCase):

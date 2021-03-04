@@ -5,9 +5,9 @@
 import unittest
 from datetime import timedelta
 
-import libmozdata.utils as utils
-import libmozdata.versions
-from libmozdata.redash import Redash
+import libtbdata.utils as utils
+import libtbdata.versions
+from libtbdata.redash import Redash
 
 
 class RedashTest(unittest.TestCase):
@@ -15,7 +15,7 @@ class RedashTest(unittest.TestCase):
         if not Redash.TOKEN:
             return
 
-        versions = libmozdata.versions.get()
+        versions = libtbdata.versions.get()
 
         end_date = utils.get_date_ymd("yesterday")
         start_date = utils.get_date_ymd(end_date - timedelta(10))

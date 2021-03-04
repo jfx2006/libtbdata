@@ -29,24 +29,24 @@ class Mercurial(Connection):
         """Get the repo name
 
         Args:
-            channel (str): channel version of firefox
+            channel (str): channel version of thunderbird
 
         Returns:
             str: the repo name
         """
         if channel == "nightly" or channel == "central":
-            return "mozilla-central"
-        elif channel == "inbound":
-            return "integration/mozilla-inbound"
+            return "comm-central"
+        elif channel == "release":
+            return "releases/comm-esr78"
         else:
-            return "releases/mozilla-" + channel
+            return "releases/comm" + channel
 
     @staticmethod
     def get_repo_url(channel):
         """Get the repo url
 
         Args:
-            channel (str): channel version of firefox
+            channel (str): channel version of thunderbird
 
         Returns:
             str: the repo url
@@ -211,7 +211,7 @@ class FileInfo(Mercurial):
         """Get the api url
 
         Args:
-            channel (str): channel version of firefox
+            channel (str): channel version of thunderbird
 
         Returns:
             str: the api url
@@ -234,7 +234,7 @@ class FileInfo(Mercurial):
 
         Args:
             paths (List[str]): the paths
-            channel (str): channel version of firefox
+            channel (str): channel version of thunderbird
             node (Optional[str]): the node, by default 'default'
 
         Returns:
@@ -301,7 +301,7 @@ class Annotate(Mercurial):
         """Get the api url
 
         Args:
-            channel (str): channel version of firefox
+            channel (str): channel version of thunderbird
 
         Returns:
             str: the api url

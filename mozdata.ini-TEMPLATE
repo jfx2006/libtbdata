@@ -1,5 +1,5 @@
 [User-Agent]
-name = libmozdata
+name = libtbdata
 
 [X-Forwarded-For]
 data =

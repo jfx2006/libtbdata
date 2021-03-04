@@ -40,7 +40,7 @@ def short_name_match(short_name, real_name, email, exact_matching=True):
 
         return (
             (short_name in real_name)
-            or (short_name + "@mozilla.com" in real_name)
+            or (short_name + "@thunderbird.net" in real_name)
             or (possible_short_name1 and short_name == possible_short_name1)
             or (possible_short_name2 and short_name == possible_short_name2)
             or (email.startswith(short_name + "@"))
@@ -427,7 +427,7 @@ def get_commits_for_bug(bug):
     )
     bug_pattern = re.compile(r"[\t ]*bug[\t ]*([0-9]+)")
     landings = Bugzilla.get_landing_comments(
-        bug["comments"], ["inbound", "central", "fx-team"]
+        bug["comments"], ["central"]
     )
     revs = {}
     backed_out_revs = set()
@@ -792,7 +792,10 @@ def uplift_info(bug, channel):
         "response_delta": timedelta(),
         "release_delta": timedelta(),
     }
-    approval_flag = "approval-mozilla-" + channel
+    if channel == "release":
+        approval_flag = "approval-comm-esr78"
+    else:
+        approval_flag = "approval-comm-" + channel
 
     app_flags = [
         flag
@@ -853,7 +856,7 @@ def uplift_info(bug, channel):
             break
 
     # Landing dates per useful channels
-    channels = ["nightly", "aurora", "beta", "release", "esr"]
+    channels = ["nightly", "beta", "release"]
     landing_comments = Bugzilla.get_landing_comments(bug["comments"], channels)
     landings = dict(zip(channels, [None] * len(channels)))
     for c in landing_comments:
@@ -885,10 +888,10 @@ def get_patch_info(
     bugs,
     base_versions=None,
     extra=None,
-    channels=["release", "aurora", "beta", "nightly"],
+    channels=["release", "beta", "nightly"],
 ):
     landing_patterns = Bugzilla.get_landing_patterns(channels=channels)
-    approval_pattern = re.compile(r"approval-mozilla-([a-zA-Z0-9]+)\+")
+    approval_pattern = re.compile(r"approval-comm-([a-zA-Z0-9]+)\+")
 
     def comment_handler(bug, bugid, data):
         r = Bugzilla.get_landing_comments(bug["comments"], [], landing_patterns)

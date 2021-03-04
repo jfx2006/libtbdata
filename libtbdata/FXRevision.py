@@ -7,13 +7,13 @@ import re
 from connection import Connection
 
 
-class FXRevision(Connection):
+class TBRevision(Connection):
 
     ARCHIVES_URL = "http://archive.mozilla.org"
-    NIGHTLY_URL = ARCHIVES_URL + "/pub/firefox/nightly/"
+    NIGHTLY_URL = ARCHIVES_URL + "/pub/thunderbird/nightly/"
 
     def __init__(self, versions, fx_version, os):
-        super(FXRevision, self).__init__(self.ARCHIVES_URL)
+        super(TBRevision, self).__init__(self.ARCHIVES_URL)
         self.dates = {}
         self.fx_version = fx_version
         self.os = os
@@ -32,7 +32,7 @@ class FXRevision(Connection):
         return self.info
 
     def __make_url(self, date):
-        return "%s%s/%s/%s-mozilla-central/firefox-%s.en-US.%s.json" % (
+        return "%s%s/%s/%s-comm-central/thunderbird-%s.en-US.%s.json" % (
             self.NIGHTLY_URL,
             date[0],
             date[1],

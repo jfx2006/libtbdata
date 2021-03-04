@@ -15,8 +15,8 @@ except ImportError:
 class ConfigTest(unittest.TestCase):
     def tearDown(self):
         try:
-            del sys.modules["libmozdata"]
-            del sys.modules["libmozdata.config"]
+            del sys.modules["libtbdata"]
+            del sys.modules["libtbdata.config"]
         except KeyError:
             pass
 
@@ -63,7 +63,7 @@ class ConfigTest(unittest.TestCase):
             pass
 
     def test_config_doesnt_exist(self):
-        from libmozdata import config
+        from libtbdata import config
 
         self.assertIsNone(config.get("Section", "Option"))
         self.assertEqual(config.get("Section", "Option", "Default"), "Default")
@@ -78,7 +78,7 @@ class ConfigTest(unittest.TestCase):
             custom_conf.set("Section2", "Option", "Value3")
             custom_conf.write(f)
 
-        from libmozdata import config
+        from libtbdata import config
 
         self.assertEqual(config.get("Section", "Option"), "Value")
         self.assertEqual(config.get("Section", "Option", "Default"), "Value")
@@ -99,7 +99,7 @@ class ConfigTest(unittest.TestCase):
             custom_conf.set("Section2", "Option", "Value1, Value2, Value3")
             custom_conf.write(f)
 
-        from libmozdata import config
+        from libtbdata import config
 
         self.assertEqual(config.get("Section", "Option"), "Value")
         self.assertEqual(config.get("Section", "Option2", type=int), 123)
@@ -121,7 +121,7 @@ class ConfigTest(unittest.TestCase):
             custom_conf.set("Section4", "Option7", "Value10")
             custom_conf.write(f)
 
-        from libmozdata import config
+        from libtbdata import config
 
         self.assertEqual(config.get("Section3", "Option5"), "Value8")
         self.assertEqual(config.get("Section3", "Option5", "Default"), "Value8")
@@ -142,7 +142,7 @@ class ConfigTest(unittest.TestCase):
             custom_conf.set("Section6", "Option9", "Value13")
             custom_conf.write(f)
 
-        from libmozdata import config
+        from libtbdata import config
 
         config.set_config(config.ConfigIni("config.ini"))
 
@@ -158,7 +158,7 @@ class ConfigTest(unittest.TestCase):
 
 class ConfigEnvTest(unittest.TestCase):
     def test_config_env(self):
-        from libmozdata import config
+        from libtbdata import config
 
         os.environ["LIBMOZDATA_CFG_BUGZILLA_TOKEN"] = "my_bugzilla_api_key"
         cfg = config.ConfigEnv()

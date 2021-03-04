@@ -9,7 +9,7 @@ import unittest
 
 from dateutil.tz import tzutc
 
-from libmozdata import utils
+from libtbdata import utils
 
 
 class UtilsTest(unittest.TestCase):
@@ -123,7 +123,7 @@ class UtilsTest(unittest.TestCase):
     def test_uplift_comment_html(self):
         import glob
 
-        from libmozdata.patchanalysis import parse_uplift_comment as parse
+        from libtbdata.patchanalysis import parse_uplift_comment as parse
 
         # Bugzilla bug
         out = parse("This is about bUg 12345. What a great bug.")
