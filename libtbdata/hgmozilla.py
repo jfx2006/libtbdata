@@ -37,9 +37,9 @@ class Mercurial(Connection):
         if channel == "nightly" or channel == "central":
             return "comm-central"
         elif channel == "release":
-            return "releases/comm-esr78"
+            return "releases/comm-esr91"
         else:
-            return "releases/comm" + channel
+            return "releases/comm-{}".format(channel)
 
     @staticmethod
     def get_repo_url(channel):
